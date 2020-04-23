@@ -72,11 +72,6 @@ constructor(private http:HttpClient) { }
   getAllLocation() {
     return this.http.get<Location[]>(this.baseUrl + 'location/all', {});
   }
-
-  changeStatus(id: number) {
-    return this.http.post(this.baseUrl + 'location/' + id + '/changeStatus', {});
-  }
-
   updateLocation(location: Location) {
     return this.http.put(this.baseUrl + 'location', location);
   }

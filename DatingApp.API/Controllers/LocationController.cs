@@ -56,11 +56,13 @@ namespace DatingApp.API.Controllers
             return BadRequest($"Updating Location {locationDto.Location_ID} Failed on save");
             
         }
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             if(await _locationService.Delete(id))
             return NoContent();
-            throw new Exception("Error deleting the Location");
+            throw new Exception("Error deleting the Location "+id);
         }
+           
     }
 }

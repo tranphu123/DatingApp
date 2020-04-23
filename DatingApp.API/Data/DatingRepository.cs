@@ -49,7 +49,7 @@ namespace DatingApp.API.Data
         }
          public void Remove(T entity)
         {
-           
+            _context.Set<T>().Remove(entity);
         }
 
         public async Task<bool> SaveAll()

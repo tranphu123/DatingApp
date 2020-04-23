@@ -8,6 +8,12 @@ import { LocationResolver } from './_resolvers/location.resolver';
 import { LocationAddComponent } from './Locaition/location-add/location-add.component';
 
 export const appRoutes: Routes =[
+  {
+    path: "",
+    canActivate: [AuthGuard],
+    redirectTo: "dashboard",
+    pathMatch: "full"
+  },
   {path: 'home', component: HomeComponent},
   {
     path:'',
