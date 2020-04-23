@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
 {
-    
+     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class LocationController : ControllerBase
@@ -61,7 +61,7 @@ namespace DatingApp.API.Controllers
         {
             if(await _locationService.Delete(id))
             return NoContent();
-            throw new Exception("Error deleting the Location "+id);
+            throw new Exception("Error deleting the Location ");
         }
            
     }

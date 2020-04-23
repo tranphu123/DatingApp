@@ -45,7 +45,8 @@ namespace DatingApp.API._Services.Services
 
        public async Task<List<LocationDto>> GetAllAsync()
         {
-           return await _repoLocation.FindAll().ProjectTo<LocationDto>(_configMapper).OrderByDescending(x => x.Location_ID).ToListAsync();
+           return await _repoLocation.FindAll().ProjectTo<LocationDto>(_configMapper)
+           .OrderByDescending(x => x.Location_ID).ToListAsync();
 
         }
 

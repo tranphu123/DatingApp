@@ -10,6 +10,7 @@ namespace DatingApp.API.Helpers.AutoMapper
         public DtoToEfMappingProfile()
         {
             CreateMap<LocationDto, Location>();
+            CreateMap<PoDto,Po>();
           
         }
     }

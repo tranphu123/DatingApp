@@ -23,6 +23,9 @@ import { AlertifyService } from './_core/_services/alertify.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { locationService } from './_core/_services/Location.service';
 import { LocationResolver } from './_resolvers/location.resolver';
+import { PoAddComponent } from './Po/po-add/po-add.component';
+import { PoListComponent } from './Po/po-list/po-list.component';
+import { PoResolver } from './_resolvers/po.resolver';
 
 
 
@@ -38,7 +41,9 @@ export function tokenGetter() {
       HomeComponent,
       RegisterComponent,
       DashboardComponent,
-      LocationAddComponent
+      LocationAddComponent,
+      PoAddComponent,
+      PoListComponent
 
    ],
    imports: [
@@ -55,8 +60,8 @@ export function tokenGetter() {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          whitelistedDomains: ['http://localhost:5000'],
-          blacklistedRoutes: ['http://localhost:5000/api/auth']
+          whitelistedDomains: ['localhost:5000'],
+          blacklistedRoutes: ['localhost:5000/api/auth']
         }
       })
    ],
@@ -65,7 +70,8 @@ export function tokenGetter() {
       AuthService,
       AuthGuard,
       locationService,
-      LocationResolver
+      LocationResolver,
+      PoResolver
    ],
    bootstrap: [
       AppComponent

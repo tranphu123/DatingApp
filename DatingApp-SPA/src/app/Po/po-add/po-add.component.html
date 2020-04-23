@@ -1,0 +1,93 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <strong *ngIf="!po.id;else elseBlock">Add new</strong>
+          <ng-template #elseBlock><strong>Update</strong></ng-template>
+           PO
+          <button type="button" class="btn btn-sm btn-primary float-right" (click)="backList()"><i class="fa fa-chevron-left"></i>
+            Back</button>
+        </div>
+        <form class="form-horizontal" #addPoForm="ngForm" (ngSubmit)="addPoForm.valid && saveAndNext()">
+        <div class="card-body">
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">PO No</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.pO_No" required name="Po No" class="form-control"
+                  placeholder="Enter PO No..">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">No Line</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.no_Line" name="No Line" class="form-control"
+                  placeholder="Enter No Line..">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Model</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.model" name="model" class="form-control"
+                  placeholder="Enter Model..">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Model Name</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.model_Name" name="Model_name" class="form-control"
+                  placeholder="Enter model name..">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Article</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.article" name="article" class="form-control"
+                  placeholder="Enter Article name..">
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Qty</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.qty" name="qty" class="form-control"
+                  placeholder="Enter qty ">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">CFD</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.cfd" name="cfd" class="form-control"
+                  placeholder="Enter CFD..">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Cutting Day</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.cutting_Day" name="cutting_Day" class="form-control"
+                  placeholder="Enter cutting Day ..">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 col-form-label" for="hf-password">Building</label>
+              <div class="col-md-3">
+                <input type="text" [(ngModel)]="po.building" name="building" class="form-control"
+                  placeholder="Enter Building  ..">
+              </div>
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+          <button type="button" class="btn btn-sm btn-danger" (click)="cancel()"><i class="fa fa-ban"></i> Cancel</button>
+          <button type="submit" *ngIf="flag=='0'" class="btn btn-sm btn-primary ml-1" [disabled]="!addPoForm.valid"><i class="fa fa-check"></i> Save & Next</button>
+          <button type="button" class="btn btn-sm btn-success ml-1" [disabled]="!addPoForm.valid" (click)="save()"><i class="fa fa-check"></i> Save</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

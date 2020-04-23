@@ -43,7 +43,7 @@ export class LocaitionComponent implements OnInit {
       this.loadsLocation();
     }
   loadsLocation(){
-    if (this.searchKey === false) {
+    if (this.searchKey === false && this.text =='') {
       this.locationService.GetLocation(this.pagination.currentPage, this.pagination.itemsPerPage)
       .subscribe((res: PaginatedResult<Location[]>) => {
         this.locations = res.result;
@@ -64,7 +64,6 @@ export class LocaitionComponent implements OnInit {
       }
   }
   changeToEdit(location: Location) {
-    debugger;
     this.locationService.changeLocation(location);
     this.locationService.changeFlag('1');
     this.router.navigate(['/location/add']);

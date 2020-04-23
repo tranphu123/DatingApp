@@ -14,15 +14,15 @@
             <div class="form-group row">
               <label class="col-md-1 col-form-label" for="hf-password">location Name</label>
               <div class="col-md-3">
-                <input type="text" [(ngModel)]="location.location_name" name="location_name" class="form-control"
+                <input type="text" [(ngModel)]="location.location_name"required name="location_name" class="form-control"
                   placeholder="Enter location name..">
               </div>
             </div>
         </div>
         <div class="card-footer">
           <button type="button" class="btn btn-sm btn-danger" (click)="cancel()"><i class="fa fa-ban"></i> Cancel</button>
-          <button type="submit" *ngIf="flag=='0'" class="btn btn-sm btn-primary" [disabled]="!addLocationForm.valid"><i class="fa fa-check"></i> Save & Next</button>
-          <button type="button" class="btn btn-sm btn-success" [disabled]="!addLocationForm.valid" (click)="save()"><i class="fa fa-check"></i> Save</button>
+          <button type="submit" *ngIf="flag=='0'" class="btn btn-sm btn-primary ml-1" [disabled]="!addLocationForm.valid"><i class="fa fa-check"></i> Save & Next</button>
+          <button type="button" class="btn btn-sm btn-success ml-1" [disabled]="!addLocationForm.valid" (click)="save()"><i class="fa fa-check"></i> Save</button>
         </div>
         </form>
       </div>
