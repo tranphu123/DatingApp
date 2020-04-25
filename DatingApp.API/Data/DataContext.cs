@@ -9,5 +9,6 @@ namespace DatingApp.API.Data
         public DbSet<Users> Users{get; set;}
         public DbSet<Location> Location{get;set;}
         public DbSet<Po> Po{get;set;}
+        public DbSet<Order_Part> order_Part{get;set;}
     }
 }

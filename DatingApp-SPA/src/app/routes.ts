@@ -8,6 +8,11 @@ import { LocationAddComponent } from './Locaition/location-add/location-add.comp
 import { PoListComponent } from './Po/po-list/po-list.component';
 import { PoAddComponent } from './Po/po-add/po-add.component';
 import { PoResolver } from './_resolvers/po.resolver';
+import { OrderPartListComponent } from './OrderPart/orderPart-List/orderPart-List.component';
+import { OrderPartAddComponent } from './OrderPart/orderPart-add/orderPart-add.component';
+import { OrderPartResolver } from './_resolvers/orderPart.resolver';
+import { ReportComponent } from './report/report.component';
+import { ReportResolver } from './_resolvers/report.resolver';
 
 export const appRoutes: Routes = [
   {
@@ -35,6 +40,11 @@ export const appRoutes: Routes = [
       { path: 'po', component: PoListComponent,
        resolve: { po: PoResolver } },
       { path: 'po/add', component: PoAddComponent },
+      {path: 'orderPart',component:OrderPartListComponent,
+      resolve: {orderPart: OrderPartResolver}},
+      {path: 'orderPart/add',component:OrderPartAddComponent},
+      {path:'report',component:ReportComponent,
+       resolve: {report:ReportResolver}},
     ],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

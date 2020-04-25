@@ -16,7 +16,7 @@ export class LocaitionComponent implements OnInit {
    locations: Location[];
    location: any;
    pagination: Pagination;
-   text: string;
+   text: string ='';
    searchKey = false;
 
   constructor(private locationService: locationService,

@@ -1,0 +1,50 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Report
+          <label class="ml-4">Po No</label>
+          <input type="text" name="search" id="search" [(ngModel)]="po_No" class="form-control report-search"
+            placeholder="Po No" />
+            <button type="button" class="btn btn-primary btn-sm mr-2 ml-1" (click)="search()">Search</button>
+            <button type="button" class="btn btn-primary btn-sm mr-2 ml-1" (click)="reset()">Reset</button>
+        </div>
+
+        <div class="card-body">
+          <ngx-spinner bdOpacity="0.2" bdColor="rgba(51,51,51,0.8)" size="medium" color="#20A8D8" type="pacman">
+          </ngx-spinner>
+          <table class="table table-bordered">
+            <th>PO No</th>
+            <th>Model No</th>
+            <th>Model Name</th>
+            <th>Article</th>
+            <th>Order</th>
+            <th>Qty</th>
+            <th>CFD</th>
+            <th>Cutting Day</th>
+            <th>Building</th>
+
+            <tr *ngFor="let item of reports">
+              <td>{{ item.po_No }}</td>
+              <td>{{ item.model_No }}</td>
+              <td>{{ item.model_Name_Part }}</td>
+              <td>{{ item.article }}</td>
+              <td>{{ item.order }}</td>
+              <td>{{ item.qty }}</td>
+              <td>{{ item.cfd }}</td>
+              <td>{{ item.cutting_Day }}</td>
+              <td>{{ item.building }}</td>
+            </tr>
+          </table>
+          <div class="d-flex">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [(ngModel)]="pagination.currentPage"
+              [itemsPerPage]="pagination.itemsPerPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+              nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+            </pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

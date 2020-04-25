@@ -72,9 +72,15 @@ namespace DatingApp
             services.AddScoped<ILocationRepository,LocationRepository>();
              services.AddScoped<IAuthRespository,AuthRespository>();
              services.AddScoped<IPoRepository,PoRepository>();
+             services.AddScoped<IOrderPartRepository,OrderPartRepository>();
+    
             //Service
             services.AddScoped<ILocationService,LocationService>();
             services.AddScoped<IPoService,PoService>();
+            services.AddScoped<IOrderPartService,OrderPartService>();
+            services.AddScoped<IReportService,ReportService>();
+ 
+          
             
         }
 

@@ -3,9 +3,9 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <strong *ngIf="!po.id; else elseBlock">Add new</strong>
+          <strong *ngIf="!orderPart.id; else elseBlock">Add new</strong>
           <ng-template #elseBlock><strong>Update</strong></ng-template>
-          PO
+          OrderPart
           <button
             type="button"
             class="btn btn-sm btn-primary float-right"
@@ -27,7 +27,7 @@
               <div class="col-md-3">
                 <input
                   type="text"
-                  [(ngModel)]="po.pO_No"
+                  [(ngModel)]="orderPart.po_No"
                   required
                   name="Po No"
                   class="form-control"
@@ -37,29 +37,15 @@
             </div>
             <div class="form-group row">
               <label class="col-md-2 col-form-label" for="hf-password"
-                >No Line</label
+                >Model No</label
               >
               <div class="col-md-3">
                 <input
                   type="text"
-                  [(ngModel)]="po.no_Line"
-                  name="No Line"
-                  class="form-control"
-                  placeholder="Enter No Line.."
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-2 col-form-label" for="hf-password"
-                >Model</label
-              >
-              <div class="col-md-3">
-                <input
-                  type="text"
-                  [(ngModel)]="po.model"
+                  [(ngModel)]="orderPart.model_No"
                   name="model"
                   class="form-control"
-                  placeholder="Enter Model.."
+                  placeholder="Enter Model No .."
                 />
               </div>
             </div>
@@ -71,7 +57,7 @@
               <div class="col-md-3">
                 <input
                   type="text"
-                  [(ngModel)]="po.model_Name"
+                  [(ngModel)]="orderPart.model_Name"
                   name="Model_name"
                   class="form-control"
                   placeholder="Enter model name.."
@@ -81,12 +67,12 @@
 
             <div class="form-group row">
               <label class="col-md-2 col-form-label" for="hf-password"
-                >Article</label
+                >Part No</label
               >
               <div class="col-md-3">
                 <input
                   type="text"
-                  [(ngModel)]="po.article"
+                  [(ngModel)]="orderPart.part_No"
                   name="article"
                   class="form-control"
                   placeholder="Enter Article name.."
@@ -96,57 +82,15 @@
 
             <div class="form-group row">
               <label class="col-md-2 col-form-label" for="hf-password"
-                >Qty</label
+                >Order</label
               >
               <div class="col-md-3">
                 <input
                   type="text"
-                  [(ngModel)]="po.qty"
+                  [(ngModel)]="orderPart.Order"
                   name="qty"
                   class="form-control"
                   placeholder="Enter qty "
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-2 col-form-label" for="hf-password"
-                >CFD</label
-              >
-              <div class="col-md-3">
-                <input
-                  type="text"
-                  [(ngModel)]="po.cfd"
-                  name="cfd"
-                  class="form-control"
-                  placeholder="Enter CFD.."
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-2 col-form-label" for="hf-password"
-                >Cutting Day</label
-              >
-              <div class="col-md-3">
-                <input
-                  type="text"
-                  [(ngModel)]="po.cutting_Day"
-                  name="cutting_Day"
-                  class="form-control"
-                  placeholder="Enter cutting Day .."
-                />
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-md-2 col-form-label" for="hf-password"
-                >Building</label
-              >
-              <div class="col-md-3">
-                <input
-                  type="text"
-                  [(ngModel)]="po.building"
-                  name="building"
-                  class="form-control"
-                  placeholder="Enter Building  .."
                 />
               </div>
             </div>

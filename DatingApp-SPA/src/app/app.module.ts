@@ -26,6 +26,11 @@ import { LocationResolver } from './_resolvers/location.resolver';
 import { PoAddComponent } from './Po/po-add/po-add.component';
 import { PoListComponent } from './Po/po-list/po-list.component';
 import { PoResolver } from './_resolvers/po.resolver';
+import { OrderPartListComponent } from './OrderPart/orderPart-List/orderPart-List.component';
+import { OrderPartAddComponent } from './OrderPart/orderPart-add/orderPart-add.component';
+import { OrderPartResolver } from './_resolvers/orderPart.resolver';
+import { ReportComponent } from './report/report.component';
+import { ReportResolver } from './_resolvers/report.resolver';
 
 
 
@@ -43,8 +48,10 @@ export function tokenGetter() {
       DashboardComponent,
       LocationAddComponent,
       PoAddComponent,
-      PoListComponent
-
+      PoListComponent,
+      OrderPartListComponent,
+      OrderPartAddComponent,
+      ReportComponent
    ],
    imports: [
       BrowserModule,
@@ -56,7 +63,6 @@ export function tokenGetter() {
       RouterModule.forRoot(appRoutes),
       PaginationModule.forRoot(),
       NgxSpinnerModule,
-
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
@@ -71,7 +77,9 @@ export function tokenGetter() {
       AuthGuard,
       locationService,
       LocationResolver,
-      PoResolver
+      PoResolver,
+      OrderPartResolver,
+      ReportResolver,
    ],
    bootstrap: [
       AppComponent

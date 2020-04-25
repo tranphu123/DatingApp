@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Po } from 'src/app/_core/_Models/Po';
 import { Pagination, PaginatedResult } from 'src/app/_core/_Models/Pagination';
-import { PoService } from 'src/app/_core/_services/po.service';
 import { HttpClient } from '@angular/common/http';
 import { AlertifyService } from 'src/app/_core/_services/alertify.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { OrderPartService } from 'src/app/_core/_services/orderPart.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { OrderPart } from 'src/app/_core/_Models/OrderPart';
 
 @Component({
-  selector: 'app-po-list',
-  templateUrl: './po-list.component.html',
-  styleUrls: ['./po-list.component.scss'],
+  selector: 'app-orderPart-List',
+  templateUrl: './orderPart-List.component.html',
+  styleUrls: ['./orderPart-List.component.scss'],
 })
-export class PoListComponent implements OnInit {
-  pos: Po[];
-  po: any;
+export class OrderPartListComponent implements OnInit {
+  orderParts: OrderPart[];
+  orderPart: any;
   pagination: Pagination;
   text: string = '';
   searchKey = false;
   constructor(
-    private poservice: PoService,
+    private orderpartService: OrderPartService,
     private http: HttpClient,
     private alertify: AlertifyService,
     private router: Router,
@@ -29,25 +29,27 @@ export class PoListComponent implements OnInit {
 
   ngOnInit() {
     this.spinner.show();
-    this.poservice.currentPo.subscribe((po) => (this.po = po));
+    this.orderpartService.currentOrderPart.subscribe(
+      (orderPart) => (this.orderPart = orderPart)
+    );
     this.route.data.subscribe((data) => {
       this.spinner.hide();
-      this.pos = data['po'].result;
-      this.pagination = data['po'].pagination;
+      this.orderParts = data['orderPart'].result;
+      this.pagination = data['orderPart'].pagination;
     });
-    console.log(this.pos);
+    console.log(this.orderParts);
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;
-    this.loadsPo();
+    this.loadsOrderPart();
   }
-  loadsPo() {
+  loadsOrderPart() {
     if (this.searchKey === false && (this.text == '' || this.text === null)) {
-      this.poservice
-        .GetPo(this.pagination.currentPage, this.pagination.itemsPerPage)
+      this.orderpartService
+        .GetOrderPart(this.pagination.currentPage, this.pagination.itemsPerPage)
         .subscribe(
-          (res: PaginatedResult<Po[]>) => {
-            this.pos = res.result;
+          (res: PaginatedResult<OrderPart[]>) => {
+            this.orderParts = res.result;
             this.pagination = res.pagination;
           },
           (error) => {
@@ -55,17 +57,17 @@ export class PoListComponent implements OnInit {
           }
         );
     } else {
-      this.poservice
-        .SeachPo(
+      this.orderpartService
+        .SeachOrderPart(
           this.pagination.currentPage,
           this.pagination.itemsPerPage,
           this.text
         )
         .subscribe(
-          (res: PaginatedResult<Po[]>) => {
-            this.pos = res.result;
+          (res: PaginatedResult<OrderPart[]>) => {
+            this.orderParts = res.result;
             this.pagination = res.pagination;
-            console.log('Search: ', this.pos);
+            console.log('Search: ', this.orderParts);
           },
           (error) => {
             console.log(error);
@@ -74,19 +76,19 @@ export class PoListComponent implements OnInit {
         );
     }
   }
-  changeToEdit(po: Po) {
-    this.poservice.changePo(po);
-    this.poservice.changeFlag('1');
-    this.router.navigate(['/po/add']);
+  changeToEdit(orderPart: OrderPart) {
+    this.orderpartService.changeOrderPart(orderPart);
+    this.orderpartService.changeFlag('1');
+    this.router.navigate(['/orderPart/add']);
   }
-  deletePo(po: Po) {
+  deletePo(orderPart: OrderPart) {
     this.alertify.confirm(
       'Delete Po',
-      'Are you sure you want to delete this ID "' + po.id + '" ?',
+      'Are you sure you want to delete this ID "' + orderPart.id + '" ?',
       () => {
-        this.poservice.deletePo(po.id).subscribe(
+        this.orderpartService.deleteOrderPart(orderPart.id).subscribe(
           () => {
-            this.loadsPo();
+            this.loadsOrderPart();
             this.alertify.success('Po has been deleted');
           },
           (error) => {
@@ -96,24 +98,24 @@ export class PoListComponent implements OnInit {
       }
     );
   }
-  addPo() {
-    this.po = {};
-    this.poservice.changePo(this.po);
-    this.poservice.changeFlag('0');
-    this.router.navigate(['/po/add']);
+  addOrderPart() {
+    this.orderPart = {};
+    this.orderpartService.changeOrderPart(this.orderPart);
+    this.orderpartService.changeFlag('0');
+    this.router.navigate(['/orderPart/add']);
   }
-  searchPo() {
+  searchOrderPart() {
     debugger;
     if (this.text != '') {
-      this.poservice
-        .SeachPo(
+      this.orderpartService
+        .SeachOrderPart(
           this.pagination.currentPage,
           this.pagination.itemsPerPage,
           this.text
         )
         .subscribe(
-          (res: PaginatedResult<Po[]>) => {
-            this.pos = res.result;
+          (res: PaginatedResult<OrderPart[]>) => {
+            this.orderParts = res.result;
             this.pagination = res.pagination;
           },
           (error) => {
@@ -122,7 +124,7 @@ export class PoListComponent implements OnInit {
         );
     } else {
       this.searchKey = false;
-      this.loadsPo();
+      this.loadsOrderPart();
     }
   }
 }

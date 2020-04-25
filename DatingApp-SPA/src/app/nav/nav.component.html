@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/dashboard']">DatingApp</a>
+    <a class="navbar-brand" [routerLink]="['/dashboard']">Home</a>
     <button
       class="navbar-toggler"
       type="button"
@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" [routerLink]="['/dashboard']">Home</a>
+          <a class="nav-link" [routerLink]="['/report']">Report</a>
         </li>
         <!-- <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" [routerLink]="['/location']">Location</a>
@@ -33,7 +33,7 @@
           <div class="dropdown-menu" *dropdownMenu>
             <a class="dropdown-item" [routerLink]="['/location']" >Location</a>
             <a class="dropdown-item" [routerLink]="['/po']" >Po</a>
-            <a class="dropdown-item" [routerLink]="['/machine']" >Machine</a>
+            <a class="dropdown-item" [routerLink]="['/orderPart']" >Order Part</a>
           </div>
         </li>
       </ul>

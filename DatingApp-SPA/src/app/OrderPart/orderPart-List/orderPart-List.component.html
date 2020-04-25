@@ -9,14 +9,14 @@
             name="search"
             id="search"
             [(ngModel)]="text"
-            class="form-control po-search"
+            class="form-control orderPart-search"
             placeholder="Search"
-            (keyup)="searchPo()"
+            (keyup)="searchOrderPart()"
           />
           <button
             type="button"
             class="btn btn-sm btn-primary float-right"
-            (click)="addPo()"
+            (click)="addOrderPart()"
           >
             <i class="fa fa-plus"></i> Add new
           </button>
@@ -33,41 +33,31 @@
           <table class="table table-bordered">
             <th>ID</th>
             <th>Po No</th>
-            <th>No Line</th>
-            <th>Model</th>
+            <th>Model No</th>
             <th>Model Name</th>
-            <th>Article</th>
-            <th>Qty</th>
-            <th>CFD</th>
-            <th>Cutting Date</th>
-            <th>Building</th>
+            <th>Order</th>
             <th>Status</th>
             <th>Action</th>
 
-            <tr *ngFor="let po of pos">
-              <td>{{ po.id }}</td>
-              <td>{{ po.pO_No }}</td>
-              <td>{{ po.no_Line }}</td>
-              <td>{{ po.model }}</td>
-              <td>{{ po.model_Name }}</td>
-              <td>{{ po.article }}</td>
-              <td>{{ po.qty }}</td>
-              <td>{{ po.cfd }}</td>
-              <td>{{ po.cutting_Day }}</td>
-              <td>{{ po.building }}</td>
-              <td>{{ po.status }}</td>
+            <tr *ngFor="let item of orderParts">
+              <td>{{ item.id }}</td>
+              <td>{{ item.po_No }}</td>
+              <td>{{ item.model_No }}</td>
+              <td>{{ item.model_Name }}</td>
+              <td>{{ item.order }}</td>
+              <td>{{ item.status }}</td>
               <td>
                 <button
                   type="button"
                   class="btn btn-primary btn-sm mr-2"
-                  (click)="changeToEdit(po)"
+                  (click)="changeToEdit(item)"
                 >
                   <i class="fa fa-edit fa-lg"></i>
                 </button>
                 <button
                   type="button"
                   class="btn btn-danger btn-sm"
-                  (click)="deletePo(po)"
+                  (click)="deletePo(item)"
                 >
                   <i class="fa fa-trash fa-lg"></i>
                 </button>

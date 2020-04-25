@@ -11,6 +11,7 @@ namespace DatingApp.API.Helpers.AutoMapper
         {
             CreateMap<LocationDto, Location>();
             CreateMap<PoDto,Po>();
+            CreateMap<OrderPartDto,Order_Part>();
           
         }
     }
