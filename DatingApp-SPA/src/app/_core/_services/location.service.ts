@@ -87,5 +87,8 @@ constructor(private http:HttpClient) { }
   changeFlag(flag: string) {
     this.flagsource.next(flag);
   }
-
+  importExcel(files: FormData)
+  {
+    return this.http.post(this.baseUrl+'location/importExcel',files);
+  }
 }

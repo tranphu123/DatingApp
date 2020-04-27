@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Pagination, PaginatedResult } from '../../_core/_Models/Pagination';
 import {locationService} from '../../_core/_services/Location.service';
@@ -18,7 +18,8 @@ export class LocaitionComponent implements OnInit {
    pagination: Pagination;
    text: string ='';
    searchKey = false;
-
+   fileExcel:File=null;
+   @ViewChild('fileInput', {static: true}) fileInput;
   constructor(private locationService: locationService,
                       private http: HttpClient,
                       private alertify: AlertifyService,
@@ -100,6 +101,23 @@ export class LocaitionComponent implements OnInit {
       this.searchKey =false;
       this.loadsLocation();
     }
+  }
+  uploadFile()
+  {
+    if(this.fileExcel ===null)
+    {
+    this.alertify.error('Please select file');
+    }
+    const formData =new FormData();
+    formData.append('files', this.fileInput.nativeElement.files[0]);
+    this.locationService.importExcel(formData).subscribe(res=> {
+      if(res){
+        this.alertify.success('UploadFile success');
+      }else {
+        this.alertify.error('UploadFile Failer');
+      }
+    })
+
   }
 
 }

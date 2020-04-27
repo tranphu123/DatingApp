@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,8 +10,9 @@ using DatingApp.API._Services.Interface;
 using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
 using DatingApp.API.Models;
-
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
 
 namespace DatingApp.API._Services.Services
 {
@@ -74,6 +76,29 @@ namespace DatingApp.API._Services.Services
             var location = _mapper.Map<Location>(Model);
             _repoLocation.Upadate(location);
             return await _repoLocation.SaveAll();
+        }
+        public async Task<bool> importExcel(string filePath)
+        {
+            using(var package =new ExcelPackage(new FileInfo(filePath)))
+            {
+                 ExcelWorksheet workSheet = package.Workbook.Worksheets[0];
+                 LocationDto locationDto =new LocationDto();
+                  for (int i = workSheet.Dimension.Start.Row + 1; i <= workSheet.Dimension.End.Row; i++)
+                {
+                    locationDto.Location_name =workSheet.Cells[i,1].Value.ToString();
+                    var location = _mapper.Map<Location>(locationDto);
+                    _repoLocation.Add(location);
+                }
+                 try {
+                    await _repoLocation.SaveAll();
+                    return true;
+                }
+                catch (System.Exception)
+                {
+                    return false;
+                    throw;
+                } 
+            }
         }
     }
 }
