@@ -24,6 +24,8 @@
     "alertifyjs": "^1.13.1",
     "bootstrap": "^4.4.1",
     "bootswatch": "^4.4.1",
+    "exceljs": "^3.9.0",
+    "file-saver": "^2.0.2",
     "font-awesome": "^4.7.0",
     "i": "^0.3.6",
     "jquery": "^3.5.0",

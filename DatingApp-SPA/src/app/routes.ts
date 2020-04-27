@@ -44,7 +44,7 @@ export const appRoutes: Routes = [
       resolve: {orderPart: OrderPartResolver}},
       {path: 'orderPart/add',component:OrderPartAddComponent},
       {path:'report',component:ReportComponent,
-       resolve: {report:ReportResolver}},
+       resolve: {report: ReportResolver} },
     ],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

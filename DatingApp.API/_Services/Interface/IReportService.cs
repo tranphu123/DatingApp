@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
@@ -9,5 +10,7 @@ namespace DatingApp.API._Services.Interface
     {
         Task<PagedList<ReportDto>> GetAllReport(PaginationParams param);
         Task<PagedList<ReportDto>> SearchByModel(PaginationParams param, ReportSearch model);
+        Task<List<ReportDto>> GetAllExcel();
+        Task<List<ReportDto>> SearchExcel(ReportSearch model);
     }
 }

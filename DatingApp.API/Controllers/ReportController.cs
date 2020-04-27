@@ -25,6 +25,18 @@ namespace DatingApp.API.Controllers
             Response.AddPagination(report.CurrentPage,report.PageSize,report.TotalCount,report.TotalPages);
             return Ok(report);
         }
+        [HttpGet("excel",Name ="GetAllExcel")]
+        public async Task<IActionResult> GetAllExcel()
+        {
+            var report = await _reportService.GetAllExcel();
+            return Ok(report);
+        }
+        [HttpPost("searchExcel")]
+        public async Task<IActionResult> SearchExcel(ReportSearch reportSearch)
+        {
+            var report = await _reportService.SearchExcel(reportSearch);
+            return Ok(report);
+        }
         [HttpPost( Name = "SearchReportByModel")]
         public async Task<IActionResult> GetReportByModel([FromQuery] PaginationParams param,
                                                             ReportSearch reportSearch)
@@ -33,5 +45,6 @@ namespace DatingApp.API.Controllers
             Response.AddPagination(report.CurrentPage,report.PageSize,report.TotalCount,report.TotalPages);
             return Ok(report);
         }
+
     }
 }

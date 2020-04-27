@@ -8,6 +8,7 @@ using DatingApp.API._Services.Interface;
 using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
 using DatingApp.API.viewModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API._Services.Services
 {
@@ -60,7 +61,7 @@ namespace DatingApp.API._Services.Services
                 CFD = x.CFD,
                 Cutting_Day = x.Cutting_Day,
                 Building = x.Building
-            });
+            }).OrderByDescending(x=>x.Po_No);
             return await PagedList<ReportDto>.CreateAsync(listReport,param.PageNumber,param.PageSize);
         }
 
@@ -83,7 +84,7 @@ namespace DatingApp.API._Services.Services
         {
             var listPo =_poRepository.FindAll();
             var listOrderPart = _orderPartRepository.FindAll();
-            var listReport =listPo.Join(listOrderPart,x=> x.PO_No,y=>y.Po_No,(x,y) => new ReportDto
+            var listReport = listPo.Join(listOrderPart,x=> x.PO_No,y=>y.Po_No,(x,y) => new ReportDto
             {
                 Po_No = x.PO_No,
                 Model_No = y.Model_No,
@@ -96,14 +97,57 @@ namespace DatingApp.API._Services.Services
                 CFD = x.CFD,
                 Cutting_Day = x.Cutting_Day,
                 Building = x.Building
-            });
-            listReport =listReport.Where(x=> x.Po_No.Trim() == model.po_No.Trim());
+            }).Where(x=> x.Po_No.Trim() == model.po_No.Trim()).OrderByDescending(x=>x.Po_No);
             return await PagedList<ReportDto>.CreateAsync(listReport,param.PageNumber,param.PageSize);
         }
 
         public Task<bool> Update(ReportDto Model)
+        
         {
             throw new System.NotImplementedException();
+        }
+        public async Task<List<ReportDto>> GetAllExcel()
+        
+        {
+             var listPo =_poRepository.FindAll();
+            var listOrderPart = _orderPartRepository.FindAll();
+            var listReport = await listPo.Join(listOrderPart,x=> x.PO_No,y=>y.Po_No,(x,y) => new ReportDto
+            {
+                Po_No = x.PO_No,
+                Model_No = y.Model_No,
+                Model_Name_PO = x.Model_Name,
+                Model_Name_Part = y.Model_Name,
+                Part_No =y.Part_No,
+                Article = x.Article,
+                Order = y.Order,
+                Qty = x.Qty,
+                CFD = x.CFD,
+                Cutting_Day = x.Cutting_Day,
+                Building = x.Building
+            }).ToListAsync();
+            return listReport;
+        }
+        public async Task<List<ReportDto>> SearchExcel(ReportSearch Model)
+        
+        {
+                  var listPo =_poRepository.FindAll();
+            var listOrderPart = _orderPartRepository.FindAll();
+            var listReport = await listPo.Join(listOrderPart,x=> x.PO_No,y=>y.Po_No,(x,y) => new ReportDto
+            {
+                Po_No = x.PO_No,
+                Model_No = y.Model_No,
+                Model_Name_PO = x.Model_Name,
+                Model_Name_Part = y.Model_Name,
+                Part_No =y.Part_No,
+                Article = x.Article,
+                Order = y.Order,
+                Qty = x.Qty,
+                CFD = x.CFD,
+                Cutting_Day = x.Cutting_Day,
+                Building = x.Building
+            }).ToListAsync();
+            listReport =listReport.Where(x=> x.Po_No.Trim() == Model.po_No.Trim()).OrderByDescending(x=>x.Po_No).ToList();
+          return listReport;
         }
     }
 }

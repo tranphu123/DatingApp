@@ -51,7 +51,7 @@ export function tokenGetter() {
       PoListComponent,
       OrderPartListComponent,
       OrderPartAddComponent,
-      ReportComponent
+      ReportComponent,
    ],
    imports: [
       BrowserModule,
