@@ -13,24 +13,24 @@ import { appRoutes } from './routes';
 import { AuthGuard } from './_core/_guards/auth.guard';
 
 import { AppComponent } from './app.component';
-import { LocaitionComponent } from './Locaition/location-list/Locaition.component';
-import { LocationAddComponent } from './Locaition/location-add/location-add.component';
-import { NavComponent } from './nav/nav.component';
+import { LocaitionComponent } from './Views/Locaition/location-list/Locaition.component';
+import { LocationAddComponent } from './Views/Locaition/location-add/location-add.component';
+import { NavComponent } from './Views/nav/nav.component';
 import { AuthService } from './_core/_services/Auth.service';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
+import { HomeComponent } from './Views/home/home.component';
+import { RegisterComponent } from './Views/register/register.component';
 import { AlertifyService } from './_core/_services/alertify.service';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './Views/dashboard/dashboard.component';
 import { locationService } from './_core/_services/Location.service';
-import { LocationResolver } from './_resolvers/location.resolver';
-import { PoAddComponent } from './Po/po-add/po-add.component';
-import { PoListComponent } from './Po/po-list/po-list.component';
-import { PoResolver } from './_resolvers/po.resolver';
-import { OrderPartListComponent } from './OrderPart/orderPart-List/orderPart-List.component';
-import { OrderPartAddComponent } from './OrderPart/orderPart-add/orderPart-add.component';
-import { OrderPartResolver } from './_resolvers/orderPart.resolver';
-import { ReportComponent } from './report/report.component';
-import { ReportResolver } from './_resolvers/report.resolver';
+import { LocationResolver } from './_core/_resolvers/location.resolver';
+import { PoAddComponent } from './Views/Po/po-add/po-add.component';
+import { PoListComponent } from './Views/Po/po-list/po-list.component';
+import { PoResolver } from './_core/_resolvers/po.resolver';
+import { OrderPartListComponent } from './Views/OrderPart/orderPart-List/orderPart-List.component';
+import { OrderPartAddComponent } from './Views/OrderPart/orderPart-add/orderPart-add.component';
+import { OrderPartResolver } from './_core/_resolvers/orderPart.resolver';
+import { ReportComponent } from './Views/report/report.component';
+import { ReportResolver } from './_core/_resolvers/report.resolver';
 
 
 

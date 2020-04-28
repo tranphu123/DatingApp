@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Report } from '../_core/_Models/report';
-import { ReportSearch } from '../_core/_Models/reportSearch';
-import { Pagination, PaginatedResult } from '../_core/_Models/Pagination';
-import { ReportService } from '../_core/_services/report.service';
+import { Report } from '../../_core/_Models/report';
+import { ReportSearch } from '../../_core/_Models/reportSearch';
+import { Pagination, PaginatedResult } from '../../_core/_Models/Pagination';
+import { ReportService } from '../../_core/_services/report.service';
 import { HttpClient } from '@angular/common/http';
-import { AlertifyService } from '../_core/_services/alertify.service';
+import { AlertifyService } from '../../_core/_services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { timeout } from 'rxjs/operators';

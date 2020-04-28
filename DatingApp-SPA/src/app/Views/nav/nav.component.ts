@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../_core/_services/Auth.service';
-import { AlertifyService } from '../_core/_services/alertify.service';
+import { AuthService } from '../../_core/_services/Auth.service';
+import { AlertifyService } from '../../_core/_services/alertify.service';
 // import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-nav',

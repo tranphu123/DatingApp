@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import { Pagination, PaginatedResult } from '../../_core/_Models/Pagination';
-import {locationService} from '../../_core/_services/Location.service';
-import { AlertifyService } from '../../_core/_services/alertify.service';
-import { Location } from '../../_core/_Models/Location';
+import { Pagination, PaginatedResult } from '../../../_core/_Models/Pagination';
+import {locationService} from '../../../_core/_services/Location.service';
+import { AlertifyService } from '../../../_core/_services/alertify.service';
+import { Location } from '../../../_core/_Models/Location';
 import { Router, ActivatedRoute } from '@angular/router';
 import{ NgxSpinnerService } from 'ngx-spinner';
 

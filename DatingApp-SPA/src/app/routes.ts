@@ -1,18 +1,18 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LocaitionComponent } from './Locaition/location-list/Locaition.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { HomeComponent } from './Views/home/home.component';
+import { LocaitionComponent } from './Views/Locaition/location-list/Locaition.component';
+import { DashboardComponent } from './Views/dashboard/dashboard.component';
 import { AuthGuard } from './_core/_guards/auth.guard';
-import { LocationResolver } from './_resolvers/location.resolver';
-import { LocationAddComponent } from './Locaition/location-add/location-add.component';
-import { PoListComponent } from './Po/po-list/po-list.component';
-import { PoAddComponent } from './Po/po-add/po-add.component';
-import { PoResolver } from './_resolvers/po.resolver';
-import { OrderPartListComponent } from './OrderPart/orderPart-List/orderPart-List.component';
-import { OrderPartAddComponent } from './OrderPart/orderPart-add/orderPart-add.component';
-import { OrderPartResolver } from './_resolvers/orderPart.resolver';
-import { ReportComponent } from './report/report.component';
-import { ReportResolver } from './_resolvers/report.resolver';
+import { LocationResolver } from './_core/_resolvers/location.resolver';
+import { LocationAddComponent } from './Views/Locaition/location-add/location-add.component';
+import { PoListComponent } from './Views/Po/po-list/po-list.component';
+import { PoAddComponent } from './Views/Po/po-add/po-add.component';
+import { PoResolver } from './_core/_resolvers/po.resolver';
+import { OrderPartListComponent } from './Views/OrderPart/orderPart-List/orderPart-List.component';
+import { OrderPartAddComponent } from './Views/OrderPart/orderPart-add/orderPart-add.component';
+import { OrderPartResolver } from './_core/_resolvers/orderPart.resolver';
+import { ReportComponent } from './Views/report/report.component';
+import { ReportResolver } from './_core/_resolvers/report.resolver';
 
 export const appRoutes: Routes = [
   {

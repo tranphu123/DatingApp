@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Resolve, Router, ActivatedRouteSnapshot } from '@angular/router';
-import { AlertifyService } from '../_core/_services/alertify.service';
+import { Po } from '../_Models/Po';
+import { PoService } from '../_services/po.service';
+import { AlertifyService } from '../_services/alertify.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ReportService } from '../_core/_services/report.service';
-import { Report } from '../_core/_Models/report';
 
 @Injectable()
-export class ReportResolver implements Resolve<Report>
+export class PoResolver implements Resolve<Po>
 {
   pageNumber:1;
   pageSize: 5;
-  constructor(private reportService: ReportService,
+  constructor(private poService: PoService,
               private router: Router,
               private alertify: AlertifyService){}
-        resolve(route: ActivatedRouteSnapshot): Observable<Report>{
-          return this.reportService.GetallReport(this.pageNumber,this.pageSize).pipe(
+        resolve(route: ActivatedRouteSnapshot): Observable<Po>{
+          return this.poService.GetPo(this.pageNumber,this.pageSize).pipe(
             catchError(error => {
               this.alertify.error('Problem retrieving data');
               this.router.navigate(['/dashboard']);
