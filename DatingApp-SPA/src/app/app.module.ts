@@ -74,10 +74,10 @@ export function tokenGetter() {
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
-          whitelistedDomains: ['localhost:5000'],
-          blacklistedRoutes: ['localhost:5000/api/auth']
-         //   whitelistedDomains: ['10.4.5.17:2020'],
-         //  blacklistedRoutes: ['10.4.5.17:2020/api/auth']
+         //  whitelistedDomains: ['localhost:5000'],
+         //  blacklistedRoutes: ['localhost:5000/api/auth']
+           whitelistedDomains: ['10.4.5.17:2020'],
+          blacklistedRoutes: ['10.4.5.17:2020/api/auth']
         }
       }),
       environment.production ? [] : AkitaNgDevtools.forRoot(),
