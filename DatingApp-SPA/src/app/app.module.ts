@@ -31,13 +31,6 @@ import { OrderPartAddComponent } from './Views/OrderPart/orderPart-add/orderPart
 import { OrderPartResolver } from './_core/_resolvers/orderPart.resolver';
 import { ReportComponent } from './Views/report/report.component';
 import { ReportResolver } from './_core/_resolvers/report.resolver';
-import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
-import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
-import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { environment } from '../environments/environment';
-import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
-import { LocationStrategy } from '@angular/common';
-import { HashLocationStrategy } from '@angular/common';
 
 
 
@@ -70,7 +63,6 @@ export function tokenGetter() {
       RouterModule.forRoot(appRoutes),
       PaginationModule.forRoot(),
       NgxSpinnerModule,
-      SnotifyModule,
       JwtModule.forRoot({
         config: {
           tokenGetter: tokenGetter,
@@ -79,9 +71,7 @@ export function tokenGetter() {
            whitelistedDomains: ['10.4.5.17:2020'],
           blacklistedRoutes: ['10.4.5.17:2020/api/auth']
         }
-      }),
-      environment.production ? [] : AkitaNgDevtools.forRoot(),
-      AkitaNgRouterStoreModule
+      })
    ],
    providers: [
      AlertifyService,
@@ -92,14 +82,6 @@ export function tokenGetter() {
       PoResolver,
       OrderPartResolver,
       ReportResolver,
-      
-      {provide: 'SnotifyToastConfig', useValue: ToastDefaults},
-       SnotifyService,
-      { provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }},
-      {
-         provide: LocationStrategy,
-         useClass: HashLocationStrategy
-      }
    ],
    bootstrap: [
       AppComponent
