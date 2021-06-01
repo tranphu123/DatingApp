@@ -6,6 +6,7 @@ import { AlertifyService } from '../../../_core/_services/alertify.service';
 import { Location } from '../../../_core/_Models/Location';
 import { Router, ActivatedRoute } from '@angular/router';
 import{ NgxSpinnerService } from 'ngx-spinner';
+import { SignalRService } from '../../../_core/_services/SignalR.service';
 
 @Component({
   selector: 'app-Location',
@@ -25,7 +26,8 @@ export class LocaitionComponent implements OnInit {
                       private alertify: AlertifyService,
                       private router: Router,
                       private route: ActivatedRoute,
-                      private spinner: NgxSpinnerService) { }
+                      private spinner: NgxSpinnerService,
+                      private _signalR: SignalRService) { }
 
   ngOnInit(
   ) {
@@ -37,7 +39,13 @@ export class LocaitionComponent implements OnInit {
       this.locations = data['location'].result;
       this.pagination = data['location'].pagination;
     });
-    console.log(this.locations);
+    // console.log(this.locations);
+      if(this._signalR.hubConnection)
+      {
+        this._signalR.hubConnection.on("loadLocation",()=>{
+          this.loadsLocation();
+        })
+      }
     }
     pageChanged(event: any): void {
       this.pagination.currentPage = event.page;

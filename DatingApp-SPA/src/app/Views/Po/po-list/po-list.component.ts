@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { AlertifyService } from 'src/app/_core/_services/alertify.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SignalRService } from 'src/app/_core/_services/SignalR.service';
 
 @Component({
   selector: 'app-po-list',
@@ -24,7 +25,8 @@ export class PoListComponent implements OnInit {
     private alertify: AlertifyService,
     private router: Router,
     private route: ActivatedRoute,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private _signalR: SignalRService
   ) {}
 
   ngOnInit() {
@@ -35,7 +37,13 @@ export class PoListComponent implements OnInit {
       this.pos = data['po'].result;
       this.pagination = data['po'].pagination;
     });
-    console.log(this.pos);
+    // this._signalR.startConnection();
+    if(this._signalR.hubConnection)
+    {
+      this._signalR.hubConnection.on("loadPo",()=>{
+        this.loadsPo();
+      })
+    }
   }
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;

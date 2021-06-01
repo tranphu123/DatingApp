@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using DatingApp.API._Services.Interface;
 using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
+using DatingApp.API.HubConfig;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DatingApp.API.Controllers
 {
@@ -19,11 +21,14 @@ namespace DatingApp.API.Controllers
     {
         private readonly ILocationService _locationService;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IHubContext<BroadcastHub, IHubClient> _hubContext;
 
         public LocationController(ILocationService locationService,
-                                  IWebHostEnvironment webHostEnvironment)
+                                  IWebHostEnvironment webHostEnvironment,
+                                  IHubContext<BroadcastHub, IHubClient> hubContext)
         {
             _webHostEnvironment = webHostEnvironment;
+            _hubContext = hubContext;
             _locationService = locationService;
         }
         [HttpGet(Name = "GetLocation")]
@@ -51,6 +56,7 @@ namespace DatingApp.API.Controllers
         {
             if (await _locationService.Add(locationDto))
             {
+                 await _hubContext.Clients.All.loadLocation();
                 return CreatedAtRoute("GetLocation", new { });
             }
             throw new Exception("Create the location failed on save");
@@ -79,6 +85,7 @@ namespace DatingApp.API.Controllers
                 }
                 if (await _locationService.importExcel(filePath))
                 {
+                     await _hubContext.Clients.All.loadLocation();
                     return true;
                 } else {
                     return false;
@@ -91,7 +98,11 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> UpdateLocation(LocationDto locationDto)
         {
             if (await _locationService.Update(locationDto))
+            {
+                 await _hubContext.Clients.All.loadLocation();
                 return NoContent();
+            }
+                
             return BadRequest($"Updating Location {locationDto.Location_ID} Failed on save");
 
         }
@@ -99,7 +110,11 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (await _locationService.Delete(id))
-                return NoContent();
+            {
+                await _hubContext.Clients.All.loadLocation();
+                 return NoContent();
+            }
+               
             throw new Exception("Error deleting the Location ");
         }
 

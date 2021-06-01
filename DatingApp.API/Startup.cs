@@ -21,6 +21,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AutoMapper;
 using DatingApp.API.Helpers.AutoMapper;
+using DatingApp.API.HubConfig;
 
 namespace DatingApp
 {
@@ -36,9 +37,16 @@ namespace DatingApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {   
-            services.AddCors();
-
-
+              services.AddCors(options =>
+                {
+                    options.AddPolicy("CorsPolicy",
+                        builder => builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials());
+                });
+            // services.AddCors();
+            services.AddSignalR();  
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers().AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -96,12 +104,12 @@ namespace DatingApp
             app.UseAuthentication();
             app.UseAuthorization();     
           
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
-            // app.UseCors("CorsPolicy");
-
+            // app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+              app.UseCors("CorsPolicy"); 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<BroadcastHub>("/dateApp");  
             });
         }
     }

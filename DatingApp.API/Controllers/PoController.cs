@@ -3,8 +3,10 @@ using System.Threading.Tasks;
 using DatingApp.API._Services.Interface;
 using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
+using DatingApp.API.HubConfig;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace DatingApp.API.Controllers
 {
@@ -14,10 +16,13 @@ namespace DatingApp.API.Controllers
     public class PoController: ControllerBase
     {
         private readonly IPoService _poService;
+        private readonly IHubContext<BroadcastHub, IHubClient> _hubContext;
 
-        public PoController(IPoService poService)
+        public PoController(IPoService poService,
+        IHubContext<BroadcastHub, IHubClient> hubContext)
         {
             _poService = poService;
+            _hubContext = hubContext;
         }
         [HttpGet(Name ="GetPo")]
         public async Task<IActionResult> GetPo([FromQuery]PaginationParams param)
@@ -46,6 +51,7 @@ namespace DatingApp.API.Controllers
         {
             if(await _poService.Add(poDto))
             {
+                await _hubContext.Clients.All.loadPo();
                 return CreatedAtRoute("GetAllPo",new {});
             }
             throw new Exception("create Po failer on save");
@@ -54,8 +60,10 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> UpdatePo(PoDto poDto)
         {
             if(await _poService.Update(poDto))
-            
-             return NoContent();
+            {
+                await _hubContext.Clients.All.loadPo();
+                 return NoContent();
+            }
             return BadRequest($"Updating Po {poDto.ID} failer on save" );
             
         }
@@ -63,7 +71,11 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> DeletePo(int id)
         {
             if(await _poService.Delete(id))
+            {
+            await _hubContext.Clients.All.loadPo();
             return NoContent();
+            }
+
             throw new Exception("Error Deleting Po Failer");
         }
     }
